@@ -24,8 +24,29 @@ int main() {
     }
 
     bool quit = false;
+    
     SDL_Event event;
+    SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_PRESENTVSYNC);
 
+    if (NULL == renderer) {
+        cerr << "SDL renderer creation failed : " << SDL_GetError() << endl;
+        SDL_DestroyWindow(window);
+        SDL_Quit();
+        return 3;
+    }
+
+    SDL_Texture *texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_STATIC, SCREEN_WIDTH, SCREEN_HEIGHT);
+
+    if (NULL == texture) {
+        cerr << "SDL texture creation failed : " << SDL_GetError() << endl;
+        SDL_DestroyRenderer(renderer);
+        SDL_DestroyWindow(window);
+        SDL_Quit();
+        return 4;
+    }
+
+    Uint32 *buffer = new Uint32[SCREEN_WIDTH * SCREEN_HEIGHT];
+    SDL_UpdateTexture(texture, NULL, buffer, SCREEN_WIDTH * sizeof(Uint32));
     while (!quit) {
     
         while(SDL_PollEvent(&event)) {
@@ -35,6 +56,9 @@ int main() {
         }
     }
 
+    delete [] buffer;
+    SDL_DestroyTexture(texture);
+    SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     SDL_Quit();
 
