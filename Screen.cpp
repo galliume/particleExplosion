@@ -58,8 +58,9 @@ void Screen::setPixel(int x, int y, Uint8 red, Uint8 green, Uint8 blue) {
     color += green;
     color <<= 8;
     color += blue;
-    color += 0xFF;
     color <<= 8;
+    color += 0xFF;
+    
     buffer[(y * SCREEN_WIDTH) + x] = color;
 }
 
