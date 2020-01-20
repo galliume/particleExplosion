@@ -14,9 +14,9 @@ int main2() {
     color += alpha;
     color <<= 8;
     color +=red;
-    color << 8;
+    color <<= 8;
     color += green;
-    color << 8;
+    color <<= 8;
     color += blue;
 
     cout << setfill('0') << setw(8) << hex << color << endl;
