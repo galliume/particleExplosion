@@ -6,8 +6,7 @@
             "label": "build and run",
             "command": "g++-7",
             "args": [
-                "-g",
-                "${file}",
+                "${workspaceRoot}/*.cpp",
                 "-lSDL2",
                 "-o",
                 "${fileDirname}/${fileBasenameNoExtension}",
