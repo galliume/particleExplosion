@@ -24,10 +24,9 @@ int main() {
     }
 
     bool quit = false;
-    
-    SDL_Event event;
+        
     SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_PRESENTVSYNC);
-
+    
     if (NULL == renderer) {
         cerr << "SDL renderer creation failed : " << SDL_GetError() << endl;
         SDL_DestroyWindow(window);
@@ -46,7 +45,21 @@ int main() {
     }
 
     Uint32 *buffer = new Uint32[SCREEN_WIDTH * SCREEN_HEIGHT];
+
+    //fill buffer
+    memset(buffer, 0, SCREEN_WIDTH * SCREEN_HEIGHT * sizeof(Uint32));
+    
+    for (int i=0; i<SCREEN_WIDTH*SCREEN_HEIGHT; i++) {
+        buffer[i] = 0x0080FFFF;
+    }
+    
     SDL_UpdateTexture(texture, NULL, buffer, SCREEN_WIDTH * sizeof(Uint32));
+    SDL_RenderClear(renderer);
+    SDL_RenderCopy(renderer, texture, NULL, NULL);
+    SDL_RenderPresent(renderer);
+
+    SDL_Event event;
+
     while (!quit) {
     
         while(SDL_PollEvent(&event)) {
