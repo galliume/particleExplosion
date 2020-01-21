@@ -11,7 +11,7 @@ struct Particle {
     public:
         Particle();
         virtual ~Particle();
-        void update();
+        void update(int interval);
 };
 
 #endif
