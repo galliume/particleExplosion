@@ -9,6 +9,7 @@ class Screen {
         SDL_Renderer *renderer;
         SDL_Texture *texture;
         Uint32 *buffer;
+        Uint32 *boxBuffer;
     public:
         const static int SCREEN_WIDTH = 800;
         const static int SCREEN_HEIGHT = 600;
@@ -20,6 +21,7 @@ class Screen {
         void update();
         void setPixel(int x, int y, Uint8 red, Uint8 green, Uint8 blue);
         void clear();
+        void boxBlur();
 };
 
 #endif
