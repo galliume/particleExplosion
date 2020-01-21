@@ -11,6 +11,7 @@ class Swarm {
         Swarm();
         virtual ~Swarm();
         const Particle * getParticles() { return particles; };
+        void update();
 };
 
 #endif
